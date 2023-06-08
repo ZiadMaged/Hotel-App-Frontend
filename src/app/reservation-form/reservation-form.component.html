@@ -1,0 +1,69 @@
+<form novalidate #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input
+        type="hidden"
+        name="reservationId"
+        [value] = "reservation.id"
+    >
+    <input
+        type="hidden"
+        name="customerId"
+        [value] = "reservation.customerId"
+    >
+    <div class="form-group">
+        <label>Room</label>
+        <select 
+            [(ngModel)]="reservation.roomId" 
+            #roomType="ngModel" 
+            name="roomId"
+            [class.invalid]="roomType.invalid && roomType.touched"
+        >
+            <option *ngFor="let room of rooms" [value]="room.id">
+                ( 
+                  Room Num: {{room.roomNumber}} -
+                  Price: {{ room.price}}  -
+                  Floor: {{ room.floor}} -
+                  BedsNum: {{room.bedsNum}}  -
+                  roomType: {{getRoomType(room.roomType)}}
+                )  
+            </option>
+        </select>                
+    </div>
+    <div class="form-group">
+        <label>Nights Number</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="NightsNum"
+            name="nightsNum"
+            #nightsNum="ngModel"
+            [(ngModel)]="reservation.nightsNum"
+            required
+            maxlength="50"
+            [class.invalid]="nightsNum.invalid && nightsNum.touched"
+        >
+        <div *ngIf="nightsNum.touched">
+            <!-- <p *ngIf="nightsNum.errors['required'] ">Title is required!</p> -->
+        </div>
+    </div>        
+    <div class="form-group">
+        <label>Reservation Date</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="dd-mm-yyyy"
+            min="1990-01-01" 
+            max="2030-12-31"
+            name="reservationDate"
+            #reservationDate="ngModel"
+            [(ngModel)]="reservation.reservationDate"
+            type="date"
+            required
+            maxlength="150"
+            [class.invalid]="reservationDate.invalid && reservationDate.touched"
+        >
+        <div *ngIf="reservationDate.touched">
+            <!-- <p *ngIf="reservationDate.errors['required']">Body is required!</p> -->
+        </div>
+    </div>        
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+</form>

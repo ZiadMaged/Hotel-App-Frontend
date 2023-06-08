@@ -1,0 +1,46 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Customer Registeration</h1>
+</div>
+
+<div class="table">
+    <div class="row">
+        <div class="col-md-12">
+            <app-customer-form (customerEvent) = "refreshCustomers()"></app-customer-form>
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>BirthDate</th>
+                        <th>Reservations</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.address }}</td>
+                        <td>{{ customer.phone }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.birthDate.split('T')[0] }}</td>
+                        <td>
+                            <a routerLink="/customers/{{customer.id}}/reservations" [state]="customer"> Add/Details </a>
+                        </td>
+                        <td>
+                            <button (click)="onDelete(customer.id)"> Delete </button>
+                        </td>
+                        <td>
+                            <a routerLink="/customers/{{customer.id}}"> Edit </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+    </div>
+</div>

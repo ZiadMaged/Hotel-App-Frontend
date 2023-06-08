@@ -1,0 +1,42 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center"> {{customer.name}} Reservations</h1>
+</div>
+
+<div class="table">
+    <div class="row">
+        <div class="col-md-6">
+            <app-reservation-form (reservationEvent) = "refreshReservations()"></app-reservation-form>
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Customer Name</th>
+                        <th>Room ID</th>
+                        <th>Nights Num</th>
+                        <th>Total Price</th>
+                        <th>Reservation Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reservation of reservations">
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ reservation.roomId }}</td>
+                        <td>{{ reservation.nightsNum }}</td>
+                        <td>{{ reservation.totalPrice }}</td>
+                        <td>{{ reservation.reservationDate.split('T')[0] }}</td>
+                        <td>
+                            <button (click)="onDelete(reservation.id)"> Delete </button>
+                        </td>
+                        <td>
+                            <a routerLink="/customers/{{reservation.customerId}}/reservations/{{reservation.id}}" [state] = "customer"> Edit </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

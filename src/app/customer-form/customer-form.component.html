@@ -1,0 +1,94 @@
+<form novalidate #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input
+        type="hidden"
+        name="customerid"
+        [value] = "customer.id"
+    >
+    <div class="form-group">
+        <label>Name</label>
+        <input
+            class="
+            form-control form-control-lg"
+            placeholder="name"
+            name="customerName"
+            #customerName="ngModel"
+            [(ngModel)]="customer.name"
+            required
+            maxlength="50"
+            [class.invalid]="customerName.invalid && customerName.touched"
+        >
+        <div *ngIf="customerName.touched">
+            <!-- <p *ngIf="customerName.errors['required'] ">Title is required!</p> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="Email"
+            name="emailName"
+            #emailName="ngModel"
+            [(ngModel)]="customer.email"
+            required
+            maxlength="150"
+            [class.invalid]="emailName.invalid && emailName.touched"
+        >
+        <div *ngIf="emailName.touched">
+            <!-- <p *ngIf="emailName.errors['required']">Body is required!</p> -->
+        </div>
+    </div>   
+    <div class="form-group">
+        <label>Address</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="Address"
+            name="addressName"
+            #addressName="ngModel"
+            [(ngModel)]="customer.address"
+            required
+            maxlength="150"
+            [class.invalid]="addressName.invalid && addressName.touched"
+        >
+        <div *ngIf="addressName.touched">
+            <!-- <p *ngIf="addressName.errors['required']">Body is required!</p> -->
+        </div>
+    </div>   
+    <div class="form-group">
+        <label>Phone</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="Phone"
+            name="phoneName"
+            #phoneName="ngModel"
+            [(ngModel)]="customer.phone"
+            required
+            maxlength="150"
+            [class.invalid]="phoneName.invalid && phoneName.touched"
+        >
+        <div *ngIf="phoneName.touched">
+            <!-- <p *ngIf="phoneName.errors['required']">Body is required!</p> -->
+        </div>
+    </div>   
+    <div class="form-group">
+        <label>BithDate</label>
+        <input
+            class="form-control form-control-lg"
+            placeholder="dd-mm-yyyy"
+            min="1990-01-01" 
+            max="2030-12-31"
+            name="dateName"
+            #dateName="ngModel"
+            [(ngModel)]="customer.birthDate"
+            type="date"
+            required
+            maxlength="150"
+            [class.invalid]="dateName.invalid && dateName.touched"
+        >
+        <div *ngIf="dateName.touched">
+            <!-- <p *ngIf="dateName.errors['required']">Body is required!</p> -->
+        </div>
+    </div>        
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+</form>
